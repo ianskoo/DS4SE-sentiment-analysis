@@ -25,7 +25,9 @@ plt.savefig('../graphs/sentistrenght_month_authors')
 plt.show()
 
 #scatter plot displaying number file changed vs months, not working yet
-changed_months = dataset.plot.scatter(x='file_changed', y='Week_Day')
-changed_months.set_ylabel('Number of file changed')
-changed_months.set_xlabel('Months')
+boh = dataset.groupby(['Month'])
+bro = dataset[~dataset.Author.duplicated()]
+bro.groupby(['Month']).sum()['file_changed'].plot(kind="bar",figsize=(6,6)).set_ylabel('Number of file changed')
+#plot.scatter(x='Month', y='file_changed')
+#changed_months.set_xlabel('Months')
 plt.show()
