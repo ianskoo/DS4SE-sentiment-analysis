@@ -1,0 +1,180 @@
+\documentclass[sigconf,screen]{acmart}
+
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain} % removes running headers
+
+
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+
+%% These commands are for a PROCEEDINGS abstract or paper.
+\acmConference[Data Science for Software Engineering]{Data Science for Software Engineering}{Fall 2020}{Zurich, CH}
+
+
+%%
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{The Name of the Title is Hope}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+\author{Ben Trovato}
+\email{ben.trovato@uzh.ch}
+\affiliation{%
+  \institution{University of Zurich}
+  \city{Zurich}
+  \country{Switzerland}
+}
+
+\author{Lars Tobin}
+\email{lars.tobin@uzh.ch}
+\affiliation{%
+  \institution{University of Zurich}
+  \city{Zurich}
+  \country{Switzerland}
+}
+
+
+\author{Valerie B\'eranger}
+\email{valerie.beranger@uzh.ch}
+\affiliation{%
+  \institution{University of Zurich}
+  \city{Zurich}
+  \country{Switzerland}
+}
+
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+\renewcommand{\shortauthors}{Trovato, Tobin, B\'eranger}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+\begin{abstract}
+  Use a structured abstract format as in the following:
+
+\textbf{Background.} Describe the context of your study/approach, mentioning very briefly previous studies/solutions. This should not take more than two sentences.
+
+\textbf{Aim.} Explain in one sentence the overarching purpose of your study/approach.
+
+\textbf{Method.} Briefly describe the type of method that you employ to conduct the study and its main characteristics (e.g., origin and number of systems, type of participants and their experience). Also mention the empirical measurements you plan to do for your study.
+
+\textbf{Conclusion.} Summarize the implications that conducting your study can have for research as well as practice in software engineering.
+\end{abstract}
+
+
+
+%%
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
+\maketitle
+
+\section{Introduction}
+The introduction should give a general description of the problem domain. Moreover it should introduce the ``Problem'' providing background, such as the source of the problem, the negative consequences of the problem, and the potential benefits to solving the problem. In other words: why is the problem important? Or why is this research question important to answer?
+
+Keep in mind that, if you are creating a research proposal, the scope of the work should correspond to that of a 6-month master thesis. So plan for resources and time accordingly.
+
+\section{Related work and Background}
+
+Any studies, tools, technologies that you rely on for your study and enrich your study are described here. This is \textbf{not} where you describe your solution. This is only where you give an overview of the most-important studies (and technologies you may use) that have been published before. If you are proposing a new feature location technique that combines Latent Semantic Indexing with Program Slicing, you should give a brief description of these in the background section. If you are proposing a study on evaluating social networks of developers, this is where you describe previous studies that did similar things. The background is \textbf{not} for rehashing the problem; it is for the supporting technologies/methods of the solution/study.
+
+
+\section{Methodology}
+
+In this section, you define the research questions that structure your study/solution.
+
+\subsection{Research questions}
+
+Write here the research questions and motivate why you pick specifically these ones. Explain and motivate each research question separately.
+
+\subsection{Research method}
+
+Here you describe exactly how you plan to answer each research question or, in case you're proposing a new solution, you start explaining your brand new, enlightened solution. What, precisely, are the inputs and outputs of your solution/study? What parameters will you use? What design decisions are you making and what is the rationale behind each decision? what gold sets do you use? Will you have human evaluators? If so, how many and who were they? What metrics are you planning to use?  Etc.
+
+This is also a great place for a concrete example. Pick out one example and explain it thoroughly. Show exactly what are the input and output of your approach.
+
+\subsection{Limitations/Threats to Validity}
+
+End the methodology section with a subsection called ``Threats to Validity'' or ``Limitations'' (depending on the research method you use) to let everyone know what you perceive as the weaknesses of your study, what you try to do about those weaknesses, and how different studies can tackle them.
+
+\section{Conclusions}
+Summarize your idea and explain what is the expected impact of your research proposal.
+
+
+
+\section{Acknowledgments}
+
+Thank who needs to be thanked.
+
+
+%%
+%% The acknowledgments section is defined using the "acks" environment
+%% (and NOT an unnumbered section). This ensures the proper
+%% identification of the section in the article metadata, and the
+%% consistent spelling of the heading.
+\begin{acks}
+To Robert, for the bagels and explaining CMYK and color spaces.
+\end{acks}
+
+%%
+%% The next two lines define the bibliography style to be used, and
+%% the bibliography file.
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{sample-base}
+
+%%
+%% If your work has an appendix, this is the place to put it.
+\appendix
+
+\section{An appendix}
+
+\subsection{Part One}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+malesuada, quam in pulvinar varius, metus nunc fermentum urna, id
+sollicitudin purus odio sit amet enim. Aliquam ullamcorper eu ipsum
+vel mollis. Curabitur quis dictum nisl. Phasellus vel semper risus, et
+lacinia dolor. Integer ultricies commodo sem nec semper.
+
+\subsection{Part Two}
+
+Etiam commodo feugiat nisl pulvinar pellentesque. Etiam auctor sodales
+ligula, non varius nibh pulvinar semper. Suspendisse nec lectus non
+ipsum convallis congue hendrerit vitae sapien. Donec at laoreet
+eros. Vivamus non purus placerat, scelerisque diam eu, cursus
+ante. Etiam aliquam tortor auctor efficitur mattis.
+
+\section{Online Resources}
+
+Nam id fermentum dui. Suspendisse sagittis tortor a nulla mollis, in
+pulvinar ex pretium. Sed interdum orci quis metus euismod, et sagittis
+enim maximus. Vestibulum gravida massa ut felis suscipit
+congue. Quisque mattis elit a risus ultrices commodo venenatis eget
+dui. Etiam sagittis eleifend elementum.
+
+Nam interdum magna at lectus dignissim, ac dignissim lorem
+rhoncus. Maecenas eu arcu ac neque placerat aliquam. Nunc pulvinar
+massa et mattis lacinia.
+
+\end{document}
+\endinput
+%%
+%% End of file `sample-sigconf.tex'.
