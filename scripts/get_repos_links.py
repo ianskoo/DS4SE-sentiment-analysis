@@ -4,13 +4,7 @@ import requests
 nr_proj = 10
 
 # Define and modify call to GitHub API
-link = "\
-    q=stars:>=1000\
-    &updated:<2020-01-01\
-    &per_page=100\
-    &sort=stars\
-    &order=asc\
-    &page=" # Needed at the end for page number
+link = "q=stars:>=1000&updated:<2020-01-01&per_page=100&sort=stars&order=asc&page="
 
 with open("./data/links_medium.txt", 'w+') as f:
 
@@ -22,15 +16,16 @@ with open("./data/links_medium.txt", 'w+') as f:
                 headers={'Accept': 'application/json', 'Authorization': 'token 5a26950162202d524bcd2e14307f9ab0505f7387'}
                 )
 
-            if isinstance(r, list):
-                data = r.json()
+            data = r.json()
+
+            if isinstance(data, dict):
 
                 # Write links to file
                 for i in range(len(data['items'])):
                     f.write(data['items'][i]['html_url'] + '\n')
 
             else:
-                print(r)
+                print(r.headers['Status'])
                 break
 
         except Exception as e:
