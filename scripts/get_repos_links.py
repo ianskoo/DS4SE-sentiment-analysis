@@ -4,9 +4,9 @@ import requests
 nr_proj = 10
 
 # Define and modify call to GitHub API
-link = "q=stars:>=1000&updated:<2020-01-01&per_page=100&sort=stars&order=asc&page="
+link = "q=stars:>=300&updated:<2020-01-01&per_page=100&sort=stars&order=asc&page="
 
-with open("./data/links_medium.txt", 'w+') as f:
+with open("./data/links_small.txt", 'w+') as f:
 
     # Request 100 projects per page ("nr_proj" nr of pages)
     for p in range(nr_proj):

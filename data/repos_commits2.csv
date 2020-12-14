@@ -1,1 +1,24 @@
-i,Date,Commit Message,Author,Senti Strength
+i,Date,Commit Message,Author
+0,2016-01-06T14:23:42Z,Update README.md,visualfc
+0,2016-01-06T14:23:17Z,Update README.md,visualfc
+0,2016-01-06T14:22:41Z,Update README.md,visualfc
+0,2013-11-03T13:26:07Z,Update README.md,visualfc
+0,2013-05-10T09:29:42Z,Update README.md,visualfc
+0,2013-05-10T09:29:23Z,Update README.md,visualfc
+0,2013-05-10T09:26:28Z,Update README.md,visualfc
+0,2012-07-18T04:05:01Z,make: add sync flag,visualfc
+0,2012-07-12T23:56:16Z,add LICENSE,visualfc
+0,2012-07-12T23:55:35Z,update ui license to BSD,visualfc
+0,2012-07-12T09:13:23Z,go fmt,visualfc
+0,2012-07-12T09:12:18Z,update version,visualfc
+0,2012-07-12T09:08:15Z,update readme-build,visualfc
+0,2012-07-12T08:57:31Z,update,visualfc
+0,2012-07-12T08:50:19Z,add readme-build,visualfc
+0,2012-07-12T08:18:44Z,update README,visualfc
+0,2012-07-12T08:16:01Z,update README,visualfc
+0,2012-07-12T08:13:28Z,update README,visualfc
+0,2012-07-12T08:07:09Z,update README,visualfc
+0,2012-07-12T07:52:37Z,add minimal example,visualfc
+0,2012-07-12T07:35:45Z,add go-ui files,unknown
+0,2012-07-12T06:55:59Z,add LICENSE,visualfc
+0,2012-07-12T06:48:00Z,Initial commit,visualfc
