@@ -4,14 +4,17 @@ import csv
 import numpy as np
 
 # ---------------------------------------
-# Parameters for the API request:
+# Parameters for the API request and I/O:
 per_page = 100
 params = f"?since=2020-01-01T00:00:00Z&per_page={per_page}&page="
+repos_list_path = './data/links.txt'
+output_csv_path = './data/repos_commits_10k_stars.csv'
 # ---------------------------------------
+
 
 # Open file with links to repositories
 repos = []
-with open('./data/links_small.txt') as links:
+with open(repos_list_path) as links:
     for link in links.readlines():
         repos.append(link[19:-1])
 
@@ -20,17 +23,18 @@ with open('./data/links_small.txt') as links:
 # Returns an API response for a repository at index repo_index
 def make_request(repo_index, per_page, page_nr, params):
     
-    commits_info = requests.get(f"https://api.github.com/repos/{repos[repo_index]}/commits{params}{page_nr}",
-                                headers={'Accept': 'application/json', 'Authorization': 'token 5a26950162202d524bcd2e14307f9ab0505f7387'})
+    link = f"https://api.github.com/repos/{repos[repo_index]}/commits{params}{page_nr}"
+    headers = {'Accept': 'application/json', 'Authorization': 'token 5a26950162202d524bcd2e14307f9ab0505f7387'}
+
+    commits_info = requests.get(link, headers=headers)
 
     # Sleep while API limit reached
     while commits_info.headers['X-RateLimit-Remaining'] == '0':
         print("Waiting 60s to avoid API rate limit...")
         time.sleep(60)
         # Try again
-        commits_info = requests.get(f"https://api.github.com/repos/{repos[repo_index]}/commits{params}{page_nr}",
-                                headers={'Accept': 'application/json', 'Authorization': 'token 5a26950162202d524bcd2e14307f9ab0505f7387'})
-
+        commits_info = requests.get(link, headers=headers)
+        
     return commits_info.json()
 
 
@@ -39,7 +43,7 @@ def save_data(array):
     # print("Saving data...", end="\r")
     # np.save('./data/magic_array', array)
 
-    with open('./data/repos_commits2.csv', 'w', newline='', encoding='utf-8') as file:
+    with open(output_csv_path, 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         for x in array:
             writer.writerow([x[0],x[1],x[2],x[3]])
@@ -85,11 +89,12 @@ for i in range(len(repos)):
         # Save data if download is interrupted
         except Exception as e:
             save_data(arr)
-            print(f"Error: {e} \n. Downloaded repositories: %d" %req_cnt)
+            print(f"Error: {e} \n. Processed repositories: %d; retrieved commits: %d" %(req_cnt, comm_cnt))
             break
 
-    # Save to csv after each repo
+    # Save to csv after each repo 
+    # TODO: free array to free memory, append data to csv instead of overwriting
     save_data(arr)
 
-print("Operation completed. Downloaded repositories: %d" %(i+1))
+print("Operation completed. Processed repositories: %d; retrieved commits: %d" %(i+1, comm_cnt))
 
