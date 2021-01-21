@@ -2,11 +2,73 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import calendar
+import re
+from pandas.api.types import is_string_dtype
+from sentistrength import PySentiStr
 
-dataset = pd.read_csv('../data/repos_commits.csv')
+# Initialize SentiStrength
+senti = PySentiStr()
 
-dataset['Month'] = pd.DatetimeIndex(dataset['Date']).month
-dataset['Week_Day'] = pd.DatetimeIndex(dataset['Date']).weekday
+senti.setSentiStrengthPath('/SentiStrength.jar')
+senti.setSentiStrengthLanguageFolderPath('./SentStrength_Data_Sept2011')
+
+#Lasciate qua se no a me non runna il senti
+#senti.setSentiStrengthPath('/Users/giomonopoli/Downloads/SentiStrength.jar')
+#senti.setSentiStrengthLanguageFolderPath('/Users/giomonopoli/Downloads/SentStrength_Data_Sept2011')
+
+###Read csv file
+dataset = pd.read_csv('../data/repos_commits_300_stars_2020.csv')
+##Function for creating sentistrength table
+def createSenti(message):
+    print(message)
+    return senti.getSentiment(message)
+##Function for checking chinese messages
+def checkChinese(message):
+    return re.findall(r'[\u4e00-\u9fff]+', str(message))
+
+###Clean initial dataset by removing multilines commit messages and putting them in single lines.
+for col in dataset.columns:
+        if is_string_dtype(dataset[col]):
+            dataset[col] = dataset[col].str.replace('\n', '')
+
+###Apply senti strength on each row
+#dataset['SentiStrength'] = senti.getSentiment(dataset['Commit_Message'])[0]
+
+###Take out rows with empty commit message
+dataset = dataset[dataset.Commit_Message != None]
+
+###Take out rows with commit messages (and authors) which includes "bot" or "#NAME?"
+dataset.drop(dataset.loc[dataset['Commit_Message'].str.contains('bot', na=False)].index, inplace=True)
+dataset.drop(dataset.loc[dataset['Commit_Message'].str.contains('#NAME?', na=False)].index, inplace=True)
+dataset.drop(dataset.loc[dataset['Author'].str.contains('bot', na=False)].index, inplace=True)
+
+###Just some cleaning
+dataset['i'] = dataset['i'].astype(str).replace('\.0', '', regex=True)
+### Drop all rows which contain NA values, i.e some values are missing so its not a clean data.
+dataset = dataset.dropna()
+
+###Remove commit messages in chinese since sentistrength is done on English words
+dataset['Chinese'] = dataset['Commit_Message'].apply(checkChinese)
+dataset = dataset[~dataset.Chinese.str.len().gt(0)]
+dataset['Chinese'] = dataset['Author'].apply(checkChinese)
+dataset = dataset[~dataset.Chinese.str.len().gt(0)]
+del dataset['Chinese']
+
+###Remove commit messages with more numbers than letter (versioning messages etc..)
+dataset['Bal_char'] = 0
+for i, row in dataset.iterrows():
+    numbers = sum(c.isdigit() for c in row['Commit_Message'])
+    letters = sum(c.isalpha() for c in row['Commit_Message'])
+    ifor_val = letters - numbers
+    dataset.at[i, 'Bal_char'] = ifor_val
+
+dataset = dataset[~dataset.Bal_char.lt(0)]
+
+### Output dataset
+dataset.to_csv('../data/repos_commits.csv')
+#dataset['SentiStrength'] = dataset['Commit_Message'].apply(createSenti)
+#dataset['Month'] = pd.DatetimeIndex(dataset['Date']).month
+"""dataset['Week_Day'] = pd.DatetimeIndex(dataset['Date']).weekday
 b = dataset.groupby('Author',sort=False).size().reset_index(name='file_changed')
 dataset = pd.merge(dataset, b, on='Author')
 dataset = dataset[['i', 'Author', 'file_changed','Date', 'Month','Week_Day','Commit Message','Senti Strength']]
@@ -30,4 +92,4 @@ bro = dataset[~dataset.Author.duplicated()]
 bro.groupby(['Month']).sum()['file_changed'].plot(kind="bar",figsize=(6,6)).set_ylabel('Number of file changed')
 #plot.scatter(x='Month', y='file_changed')
 #changed_months.set_xlabel('Months')
-plt.show()
+plt.show()"""

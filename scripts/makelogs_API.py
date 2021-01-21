@@ -2,7 +2,6 @@ import requests
 import time
 import csv
 import numpy as np
-
 # ---------------------------------------
 # Parameters for the API request and I/O:
 per_page = 100
