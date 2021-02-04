@@ -32,20 +32,37 @@ for el in dataset['SentiStrength\r']:
     elif el == -3:
         count_minus3 += 1
 
-per_0 = count_0 / count * 100
-per_1 = count_1 / count * 100
-per_minus1 = count_minus1 / count * 100
-per_2 = count_2 / count * 100
-per_minus2 = count_minus2 / count * 100
-per_3 = count_3 / count * 100
-per_minus3 = count_minus3 / count * 100
+print("0: {}".format(count_0))
+print("1: {}".format(count_1))
+print("-1: {}".format(count_minus1))
+print("2: {}".format(count_2))
+print("-2: {}".format(count_minus2))
+print("3: {}".format(count_3))
+print("-3: {}\n".format(count_minus3))
 
-print("Number of 0: {}%".format(per_0))
-print("Number of 1: {}%".format(per_1))
-print("Number of -1: {}%".format(per_minus1))
-print("Number of 2: {}%".format(per_2))
-print("Number of -2: {}%".format(per_minus2))
-print("Number of 3: {}%".format(per_3))
-print("Number of -3: {}%".format(per_minus3))
 
-print("total: {}".format(per_0+per_1+per_2+per_3+per_minus1+per_minus2+per_minus3))
+negative_comments = round((count_minus1+count_minus2+count_minus3)/count * 100, 3)
+print("#negative comments: {}%".format(negative_comments))
+
+neutral_comments = round(count_0/count * 100, 3)
+print("#neutral comments: {}%".format(neutral_comments))
+
+positive_comments = round((count_1+count_2+count_3)/count * 100, 3)
+print("#positive comments: {}%".format(positive_comments))
+# per_0 = count_0 / count * 100
+# per_1 = count_1 / count * 100
+# per_minus1 = count_minus1 / count * 100
+# per_2 = count_2 / count * 100
+# per_minus2 = count_minus2 / count * 100
+# per_3 = count_3 / count * 100
+# per_minus3 = count_minus3 / count * 100
+#
+# print("Number of 0: {}%".format(per_0))
+# print("Number of 1: {}%".format(per_1))
+# print("Number of -1: {}%".format(per_minus1))
+# print("Number of 2: {}%".format(per_2))
+# print("Number of -2: {}%".format(per_minus2))
+# print("Number of 3: {}%".format(per_3))
+# print("Number of -3: {}%".format(per_minus3))
+#
+# print("total: {}".format(per_0+per_1+per_2+per_3+per_minus1+per_minus2+per_minus3))
