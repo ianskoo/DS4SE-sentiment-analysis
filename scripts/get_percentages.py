@@ -31,6 +31,7 @@ for el in dataset.iterrows():
     day = datetime.datetime.strptime(el[1][2], "%Y-%m-%dT%H:%M:%SZ").weekday()
     if day == 0:
         mondays['tot'] += 1
+        #print(el[1][5])
         check_score(el[1][6], mondays)
 
     elif day == 1:
@@ -59,13 +60,13 @@ for el in dataset.iterrows():
 
 
 weekday_table.field_names = ["Day", "#Commits", "#Pos. Commits", "#Neutral Commits", "#Neg. commits"]
-weekday_table.add_row(["Monday", mondays['tot'], mondays['pos'], mondays['neutr'], mondays['neg']])
-weekday_table.add_row(["Tuesday", tuesdays['tot'], tuesdays['pos'], tuesdays['neutr'], tuesdays['neg']])
-weekday_table.add_row(["Wednesday", wednesdays['tot'], wednesdays['pos'], wednesdays['neutr'], wednesdays['neg']])
-weekday_table.add_row(["Thursday", thursdays['tot'], thursdays['pos'], thursdays['neutr'], thursdays['neg']])
-weekday_table.add_row(["Friday", fridays['tot'], fridays['pos'], fridays['neutr'], fridays['neg']])
-weekday_table.add_row(["Saturday", saturdays['tot'], saturdays['pos'], saturdays['neutr'], saturdays['neg']])
-weekday_table.add_row(["Sunday", sundays['tot'], sundays['pos'], sundays['neutr'], sundays['neg']])
+weekday_table.add_row(["Monday", mondays['tot'], "{} ({})".format(mondays['pos'], round(mondays['pos']/mondays['tot']* 100, 2)), "{} ({})".format(mondays['neutr'], round(mondays['neutr']/mondays['tot']* 100, 2)), "{} ({})".format(mondays['neg'], round(mondays['neg']/mondays['tot']* 100, 2))])
+weekday_table.add_row(["Tuesday", tuesdays['tot'], "{} ({})".format(tuesdays['pos'], round(tuesdays['pos']/tuesdays['tot']* 100, 2)), "{} ({})".format(tuesdays['neutr'], round(tuesdays['neutr']/tuesdays['tot']* 100, 2)), "{} ({})".format(tuesdays['neg'], round(tuesdays['neg']/tuesdays['tot']* 100, 2))])
+weekday_table.add_row(["Wednesday", wednesdays['tot'], "{} ({})".format(wednesdays['pos'], round(wednesdays['pos']/wednesdays['tot']* 100, 2)), "{} ({})".format(wednesdays['neutr'], round(wednesdays['neutr']/wednesdays['tot']* 100, 2)), "{} ({})".format(wednesdays['neg'], round(wednesdays['neg']/wednesdays['tot']* 100, 2))])
+weekday_table.add_row(["Thursday", thursdays['tot'], "{} ({})".format(thursdays['pos'], round(thursdays['pos']/thursdays['tot']* 100, 2)), "{} ({})".format(thursdays['neutr'], round(thursdays['neutr']/thursdays['tot']* 100, 2)), "{} ({})".format(thursdays['neg'], round(thursdays['neg']/thursdays['tot']* 100, 2))])
+weekday_table.add_row(["Friday", fridays['tot'], "{} ({})".format(fridays['pos'], round(fridays['pos']/fridays['tot']* 100, 2)), "{} ({})".format(fridays['neutr'], round(fridays['neutr']/fridays['tot']* 100, 2)), "{} ({})".format(fridays['neg'], round(fridays['neg']/fridays['tot']* 100, 2))])
+weekday_table.add_row(["Saturday", saturdays['tot'], "{} ({})".format(saturdays['pos'], round(saturdays['pos']/saturdays['tot']* 100, 2)), "{} ({})".format(saturdays['neutr'], round(saturdays['neutr']/saturdays['tot']* 100, 2)), "{} ({})".format(saturdays['neg'], round(saturdays['neg']/saturdays['tot']* 100, 2))])
+weekday_table.add_row(["Sunday", sundays['tot'],"{} ({})".format(sundays['pos'], round(sundays['pos']/sundays['tot']* 100, 2)), "{} ({})".format(sundays['neutr'], round(sundays['neutr']/sundays['tot']* 100, 2)), "{} ({})".format(sundays['neg'], round(sundays['neg']/sundays['tot']* 100, 2))])
 
 print("Number of commits per weekday")
 print(weekday_table)
@@ -73,7 +74,7 @@ print(weekday_table)
 
 scores = {'tot': 0, '0': 0, '1': 0, '-1': 0, '2': 0, '-2': 0, '3': 0, '-3': 0}
 
-for el in dataset['SentiStrength\r']:
+for el in dataset['SentiStrength']:
     scores['tot'] += 1
 
     if el == 0:
