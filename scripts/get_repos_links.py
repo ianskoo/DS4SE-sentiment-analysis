@@ -4,7 +4,7 @@ import requests
 nr_proj = 10
 
 # Define and modify call to GitHub API
-link = "q=stars:>=300&updated:<2020-01-01&per_page=100&sort=stars&order=asc&page="
+link = "q=stars:>=10000&updated:<2020-01-01&per_page=100&sort=stars&order=asc&page="
 
 with open("./data/links_small.txt", 'w+') as f:
 
