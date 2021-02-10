@@ -1,6 +1,8 @@
 # DS4SE-sentiment-analysis
 Seminar project: Sentiment analysis of Github comments in modern projects using SentiStrength.
 
+In order to run the scripts, which perform API requests, the generation (and insertion in the cose) of a new API token may be needed.
+
 The code can be found under the folder scripts, containing 4 main scripts:
 
 * <em>get_repos_links.py</em> gets the link of the first 1000 projects with more or equal 10'000 stars in ascending order from the 01.01.2020. The result of running this script can be found under 'data\links.txt'
