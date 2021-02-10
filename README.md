@@ -1,7 +1,7 @@
 # DS4SE-sentiment-analysis
 Seminar project: Sentiment analysis of Github comments in modern projects using SentiStrength.
 
-In order to run the scripts, which perform API requests, the generation (and insertion in the cose) of a new API token may be needed.
+In order to run the scripts, which perform API requests, the generation (and insertion in the code) of a new API token may be needed.
 
 The code can be found under the folder scripts, containing 4 main scripts:
 
